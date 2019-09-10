@@ -104,28 +104,29 @@
         <div class="w-100"></div>
         <div class="col-md-3 d-flex">
           <div class="info bg-white p-4">
-            <p><span>Address:</span> 198 West 21th Street, Suite 721 New York NY 10016</p>
+            <p><span>Address:</span> C-206, Morya Society, Near Lake Town,
+              Bibewewadi, Pune-411037, India</p>
           </div>
         </div>
         <div class="col-md-3 d-flex">
           <div class="info bg-white p-4">
-            <p><span>Phone:</span> <a href="tel://1234567920">+ 1235 2355 98</a></p>
+            <p><span>Phone:</span> <a href="tel://+91 9370080530">+91 9370080530</a></p>
           </div>
         </div>
         <div class="col-md-3 d-flex">
           <div class="info bg-white p-4">
-            <p><span>Email:</span> <a href="mailto:info@yoursite.com">info@yoursite.com</a></p>
+            <p><span>Email:</span> <a href="mailto:siddhesh@jaritservices.com">siddhesh@jaritservices.com</a></p>
           </div>
         </div>
         <div class="col-md-3 d-flex">
           <div class="info bg-white p-4">
-            <p><span>Website</span> <a href="#">yoursite.com</a></p>
+            <p><span>Website</span> <a href="#">healthlifestylecare.com</a></p>
           </div>
         </div>
       </div>
       <div class="row block-9">
         <div class="col-md-6 order-md-last d-flex">
-          <form action="#" class="bg-white p-5 contact-form">
+          <form method="post" action="action.php" class="bg-white p-5 contact-form" onsubmit="return checkform(this);">
             <div class="form-group">
               <input type="text" class="form-control" placeholder="Your Name">
             </div>
@@ -138,15 +139,85 @@
             <div class="form-group">
               <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
             </div>
+
+            <!-- START CAPTCHA -->
+            <br>
+            <div class="capbox">
+
+              <div id="CaptchaDiv"></div>
+
+              <div class="capbox-inner">
+                Type the above number:<br>
+
+                <input type="hidden" id="txtCaptcha">
+                <input type="text" name="CaptchaInput" id="CaptchaInput" size="15"><br>
+
+              </div>
+            </div>
+            <br><br>
+            <!-- END CAPTCHA -->
+
+
             <div class="form-group">
-              <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
+              <input type="submit" name="send message" value="Send Message" class="btn btn-primary py-3 px-5">
             </div>
           </form>
+
+          <script type="text/javascript">
+
+            // Captcha Script
+
+            function checkform(theform) {
+              var why = "";
+
+              if (theform.CaptchaInput.value == "") {
+                why += "- Please Enter CAPTCHA Code.\n";
+              }
+              if (theform.CaptchaInput.value != "") {
+                if (ValidCaptcha(theform.CaptchaInput.value) == false) {
+                  why += "- The CAPTCHA Code Does Not Match.\n";
+                }
+              }
+              if (why != "") {
+                alert(why);
+                return false;
+              }
+            }
+
+            var a = Math.ceil(Math.random() * 9) + '';
+            var b = Math.ceil(Math.random() * 9) + '';
+            var c = Math.ceil(Math.random() * 9) + '';
+            var d = Math.ceil(Math.random() * 9) + '';
+            var e = Math.ceil(Math.random() * 9) + '';
+
+            var code = a + b + c + d + e;
+            document.getElementById("txtCaptcha").value = code;
+            document.getElementById("CaptchaDiv").innerHTML = code;
+
+            // Validate input against the generated number
+            function ValidCaptcha() {
+              var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
+              var str2 = removeSpaces(document.getElementById('CaptchaInput').value);
+              if (str1 == str2) {
+                return true;
+              } else {
+                return false;
+              }
+            }
+
+            // Remove the spaces from the entered and generated code
+            function removeSpaces(string) {
+              return string.split(' ').join('');
+            }
+          </script>
 
         </div>
 
         <div class="col-md-6 d-flex">
-          <div id="map" class="bg-white"></div>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3784.6573912366594!2d73.86515335073521!3d18.45385857596527!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2eae9ba39b2d1%3A0xaa8d9bb850d743ae!2sMORYA%20SOCIETY!5e0!3m2!1sen!2sin!4v1568092622865!5m2!1sen!2sin"
+            width="800" height="700" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+          <!-- <div id="map" class="bg-white"></div> -->
         </div>
       </div>
     </div>
@@ -260,8 +331,8 @@
   <script src="js/main.js"></script>
 
 </body>
-<div class="spinner-wrapper">
+<!-- <div class="spinner-wrapper">
 	<div class="spinner"></div>
-</div>
+</div> -->
 
 </html>
